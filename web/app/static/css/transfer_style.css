@@ -1,0 +1,36 @@
+.process-container{
+    max-width: 1280px;
+    width: 90%;
+    margin:2rem auto;
+    background: #FCF8E8;
+    border-radius: 45px;
+    padding: 16px;
+}
+
+.step-status{
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : 24px;
+}
+
+.step-status span{
+    color: #707070;
+    pointer-events: none;
+}
+
+.step-status span.active{
+    font-weight: bold;
+    color: #DF7861;
+}
+
+.step-status span.prev{
+    color: #000000;
+    pointer-events: all;
+}
+
+.stepation{
+    width: 20px;
+    height: 20px;
+}
