@@ -1,6 +1,5 @@
 .process-container{
-    max-width: 1280px;
-    width: 90%;
+    width: 1280px;
     margin:2rem auto;
     background: #FCF8E8;
     border-radius: 45px;
@@ -33,4 +32,71 @@
 .stepation{
     width: 20px;
     height: 20px;
+}
+
+.uploadtype-container{
+    margin: 0px auto;
+    width: 1280px;
+    text-align: center;
+}
+
+.singleupload{
+    float: left;
+    width: 50%;
+}
+
+.v-line{
+    border: 1px solid black;
+    height: 520px;
+    width: 0.1px;
+    float: left;
+}
+
+.doubleupload{
+    float: right;
+    width: 49%;
+}
+
+.uploadimg_ex{
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.uploadimg_ex_one{
+    float: left;
+}
+
+.uploadimg_ex_hor{
+    float: left;
+}
+
+.upex{
+    width: 240px;
+    height: 160px;
+}
+
+.righttri{
+    width: 20px;
+    height: 40px;
+}
+
+.plus{
+    width: 20px;
+    height: 20px;
+}
+
+.textex{
+    text-align: left;
+}
+
+.minrabtn{
+    width: 200px;
+    height: 68px;
+    border: 0;
+    border-radius: 35px;
+    padding: 1rem;
+    background: #DF7861;
+    color: #fff;
 }
