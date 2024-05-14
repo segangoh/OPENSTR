@@ -2,8 +2,11 @@
 <html>
     <head>
         <title>STR - Style Transfer for Recollection</title>
-        <!-- <link href="{{url_for('static', filename='css/vanner_style.css')}}" rel="stylesheet"> -->
+        <!--link href="{{url_for('static', filename='css/vanner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/transfer_style.css')}}" rel="stylesheet">
+        <script src="{{ url_for('static',filename='js/transfer.js') }}"></script-->
         <link rel="stylesheet" href="../../static/css/transfer_style.css">
+        <script src="../../static/js/transfer.js"></script>
     </head>
     <body>
         <header>
@@ -14,25 +17,40 @@
         <!--page contents-->
         <div class = "process-container">
             <div class ="step-status">
-                <span class = "step active" onclick="step1Back();">업로드 유형 선택</span>
+                <span class = "step active" onclick="stepBack(0);">업로드 유형 선택</span>
                 <img src="../../static/images/vector_next_triangle.png" width="8" height="16">
-                <span class = " step" onclick="step2Back();">사진 업로드</span>
+                <span class = " step" onclick="stepBack(1);">사진 업로드</span>
                 <img src="../../static/images/vector_next_triangle.png" width="8" height="16">
-                <span class = "step" onclick="step3Back();">화풍 유형 선택</span>
+                <span class = "step" onclick="stepBack(2);">화풍 유형 선택</span>
                 <img src="../../static/images/vector_next_triangle.png" width="8" height="16">
-                <span class = "step" onclick="step4Back();">화풍 선택</span>
+                <span class = "step" onclick="stepBack(3);">화풍 선택</span>
                 <img src="../../static/images/vector_next_triangle.png" width="8" height="16">
-                <span class = "step" onclick="step5Back();">Style transfer</span>
+                <span class = "step" onclick="stepBack(4);">Style transfer</span>
                 <img src="../../static/images/vector_next_triangle.png" width="8" height="16">
                 <span class = "step">결과 확인</span>
             </div>
         </div>
-        <div class="stepation">
-            <button type="button" class="btn" id="next">next</button>
+        <div class="uploadtype-container">
+            <div class = "singleupload">
+                <img src="../../static/images/sample_image.png">
+                <img src="../../static/images/vector_right_triangle.png">
+                <img src="../../static/images/sample_image.png">
+                <p>OR</p>
+                <img src="../../static/images/sample_image.png">
+                <p>사진에 새로운 화풍을 적용해보세요. 사진 전체에 적용할 수도, 인물을 제외한 배경에만 적용할 수도 있습니다.</p>
+                <button type="button" class="uploadtypebtn" id="singleuploadbtn">선택하기</button>
+            </div>
+            <div class="v-line"></div>
+            <div class = "doubleupload">
+                <img src="../../static/images/sample_image.png">
+                <img src="../../static/images/vector_plus.png">
+                <img src="../../static/images/sample_image.png">
+                <img src="../../static/images/vector_right_triangle.png">
+                <img src="../../static/images/sample_image.png">
+                <p>새로운 배경에 인물을 합성해보세요. 배경에 새로운 화풍을 적용한 뒤, 인물을 사진의 위치에 합성합니다.</p>
+                <button type="button" class="uploadtypebtn" id="doubleuploadbtn">선택하기</button>
+            </div>
         </div>
 
-        <script src="../../static/js/transfer.js">
-            includeHTML();
-        </script>
     </body>
 </html>
