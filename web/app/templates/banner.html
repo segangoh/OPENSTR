@@ -1,0 +1,19 @@
+<!--BANNER contents for <header>-->
+<a id="str_title" href="/">STR()</a>
+<nav>
+    <ul>
+        <li><a href="/transfer">Transfer</a></li>
+        <li><a href="/community">Community</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="/mypage">My page</a></li>
+        {% endif %}
+    </ul>
+</nav>
+<div>
+    {% if current_user.is_authenticated %}
+    <a href="/mypage"><span>{{user_data[1]}}</span> <img src="{{url_for('image_path', path_type=user_data[0], filename=user_data[2])}}"></a>
+    <a href="/logout">Logout</a>
+    {% else %}
+    <a href="/login">로그인 | 회원가입</a>
+    {% endif %}
+</div>

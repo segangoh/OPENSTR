@@ -1,0 +1,23 @@
+@keyframes rotate-clockwise {
+    from {
+    transform: rotate(0deg);
+    }
+    to {
+    transform: rotate(360deg);
+    }
+}
+@media (min-width: 400px){
+    .rotating-image-clockwise {
+        display: flex;
+        justify-content: center;
+        padding: 3% 0;
+        width: 300px;
+        height: 300px;
+        animation: rotate-clockwise 3s linear infinite;
+    }
+}
+
+.wait_text {
+    font-size: 2em;
+    text-align: center;
+}

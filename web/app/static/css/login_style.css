@@ -1,0 +1,59 @@
+input {
+    width: 100%;
+    height: 50px;
+    font-size: 1.5em;
+    border: 0;
+    background: #FCF8E8;
+    color: #000;
+}
+input::placeholder{
+    font-size: 1.1em;
+    color: #767676;
+    font-weight: bold;
+    padding-left: 3%;
+}
+h1{
+    font-size: 3em;
+    text-align: center;
+}
+hr{
+    height: 3px;
+    border: none;
+    background-color: #929292;
+}
+
+.error_div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 25px
+}
+.login{
+    width: 100%;
+    height: 50px;
+    font-size: 1.5em;
+    border: 0;
+    background: #DF7861;
+    color: #fff;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.register{
+    width: 100%;
+    height: 50px;
+    font-size: 1.5em;
+    border: 0;
+    background: #ECB390;
+    color: #000;
+    margin-top: 30px;
+}
+.inner_div{
+    width: 550px;
+    margin: auto;
+}
+.list{
+    margin-top: 20px;
+}
+
+#state_message{
+    font-size: 0.9em;
+}

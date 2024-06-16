@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STR - Style Transfer for Recollection</title>
+        <link href="{{url_for('static', filename='css/banner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/mypage_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/new_post_button_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/board_popup_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/new_board_popup_style.css')}}" rel="stylesheet">
+        <script src="{{url_for('static', filename='js/mypage.js')}}"></script>
+        <script src="{{url_for('static', filename='js/load_board.js')}}"></script>
+    </head>
+    <body>
+        <header>
+            <!--BANNER-->
+            {% include 'banner.html' %}
+        </header>
+
+        <!--page contents-->
+        <section>
+            <!--profile-->
+            <div id="profile">
+                <img id="user_image" src="{{url_for('image_path', path_type=user_data[0], filename=user_data[2])}}" width="80px">
+                <div id="user_text">
+                    <div id="user_name_id_block">
+                        <span id="user_name">{{user_data[1]}}</span>
+                        <span id="user_id">@{{user_data[0]}}</span>
+                    </div>
+                    <div id="user_number_block">
+                        <span class="number_text">게시물</span>
+                        <span class="number_num" id="board_num">00개</span>
+                        <span class="number_text">보관함</span>
+                        <span class="number_num" id="savebox_num">00개</span>
+                    </div>
+                </div>
+                <div id="profile_edit" onclick="check_pw()">프로필 편집</div>
+            </div>
+        </section>
+
+        <hr id="top_line_board">
+
+        <section>
+            <!--board-->
+            <div id="select_board_block">
+                <span class="board_select selected" onclick="user_board()">게시물</span>
+                <span class="board_select" onclick="user_savebox()">보관함</span>
+            </div>
+
+            <div class="boards"></div>
+        </section>
+        
+        <script>
+            mypage();
+        </script>
+
+        <!--board popup-->
+        <div class="popup_block">
+            {% include '/member/board_popup.html' %}
+        </div>
+
+        <!--floating button to write new post-->
+        {% include '/member/new_post_button.html' %}
+        
+        <!--new board popup-->
+        <div class="new_board_popup_block">
+            {% include '/member/new_board_popup.html' %}
+        </div>
+
+        <!--savebox popup-->
+        <div class="savebox_popup_background">
+            <div class="savebox_popup_block">
+                <img class="savebox_popup_image">
+                <button type="button" class="savebox_popup_close_button"><img src="{{url_for('static', filename='images/popup/vector_x.png')}}"></button>
+                <a id="savebox_download_button" href = "/{{user_data[0]}}/" download><img id="savebox_download" src="{{url_for('static', filename='images/mypage/vector_download.png')}}"></a>
+                <img id="savebox_delete" onclick="delete_savebox()" src="{{url_for('static', filename='images/mypage/vector_delete.png')}}">
+            </div>
+        </div>
+    </body>
+</html>

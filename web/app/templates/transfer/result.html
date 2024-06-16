@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STR - Style Transfer for Recollection</title>
+        <link href="{{url_for('static', filename='css/banner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/transfer_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/result_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/new_board_popup_style.css')}}" rel="stylesheet">
+        <script src="{{ url_for('static',filename='js/transfer.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/result.js') }}"></script>
+    </head>
+    <body>
+        <header>
+            <!--BANNER-->
+            {% include 'banner.html' %}
+        </header>
+        {% include 'transfer/process_bar.html' %}
+        <div class = "result_block">
+            <div>
+                <img class="result_image" src="{{url_for('image_path', path_type=type, filename=image)}}">
+            </div>
+            <div>
+                <a href = "/{{type}}/{{image}}" download><button type="button" class="download">다운로드</button></a><br>
+                {% if current_user.is_authenticated %}
+                <button id = "new_post_button">커뮤니티에 공유하기</button>
+                {% endif %}
+            </div>
+        </div>
+        {% if current_user.is_authenticated %}
+        <!-- The Modal -->
+        <div id="postModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="new_board_popup_block">
+                    {% include 'member/new_board_popup.html' %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STR - Style Transfer for Recollection</title>
+        <link href="{{url_for('static', filename='css/banner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/register_style.css')}}" rel="stylesheet">
+        <script type="text/javascript" src="{{url_for('static',filename='js/register.js')}}"></script>
+    </head>
+    <body>
+        <header>
+            <!--BANNER-->
+            {% include 'banner.html' %}
+        </header>
+        <!--page contents-->
+        <div id="register_block">
+            <form method="post" name='join' onsubmit="postdata(event)">
+                <div class="inner_div">
+                    <h1>회원가입</h1>
+                    <div class="list">
+                        <label for="user_id"><h2>아이디</h2></label>
+                        <input class="check" type="text" id="user_id" required>
+                        <button id="check_id" onclick="checkUserId(event)">중복확인</button>
+                        <div class="error_div">
+                            <span id="id_error">중복 확인이 필요합니다</span>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <label for="user_pw"><h2>비밀번호</h2></label>
+                        <input class="check" type="password" id="user_pw" required>
+                        <div class="error_div">
+                            <span id="pw_error">8~16자리 숫자, 특수문자(~!@#$%^&*()_-), 영어로 작성해주세요</span>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <label for="user_pw_check"><h2>비밀번호 확인</h2></label>
+                        <input class="check" type="password" id="user_pw_check" required>
+                        <div class="error_div">
+                            <span id="pw_check_error"></span>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <label for="user_name"><h2>이름</h2></label>
+                        <input class="check"  type="text" id="user_name" required>
+                        <div class="error_div">
+                            <span id="name_error"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="register">회원가입</button>
+                    <div class="error_div">
+                        <span id="state_message"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

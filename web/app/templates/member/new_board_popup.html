@@ -1,0 +1,127 @@
+<div class="new_board_popup">
+    <img id="select_board_image">
+    <button id="select_image_button" type="button">이미지 선택</button>
+
+    <button type="button" class="new_board_close_btn"><img src="{{url_for('static', filename='images/popup/vector_x.png')}}"></button>
+
+    <input id="title_text" type="text" placeholder="제목 입력">
+    <textarea id="contents_text" placeholder="내용 입력"></textarea>
+    <button id="new_board_submit_button" type="button" onclick="submit_new_board()">업로드</button>
+
+    <div class="savebox_image_background">
+        <div class="savebox_image_block">
+        </div>
+    </div>
+</div>
+
+<script>
+    let new_board_popup_block = document.querySelector(".new_board_popup_block");
+    let new_post_button = document.getElementById("new_post_button");
+    let new_board_close_btn = document.querySelector(".new_board_close_btn");
+
+    new_post_button.addEventListener('click', function(){
+        new_board_popup_block.classList.add('on');
+    })
+
+    new_board_close_btn.addEventListener('click', function() {
+        new_board_popup_block.classList.remove('on');
+        document.getElementById("select_board_image").removeAttribute("src");
+        document.getElementById("title_text").value = "";
+        document.getElementById("contents_text").value = "";
+    })
+
+    let savebox_image_background = document.querySelector(".savebox_image_background");
+    let savebox_image_block = document.querySelector(".savebox_image_block");
+    let select_image_button = document.getElementById("select_image_button");
+
+    select_image_button.addEventListener('click', function() {
+        savebox_image_background.classList.add('on');
+        select_savebox();
+    })
+
+    async function select_savebox() {
+        savebox_image_block.innerHTML = "";
+        let savebox_image_select_block = document.createElement("div");
+        savebox_image_select_block.setAttribute("class", "savebox_image_select_block");
+        savebox_image_block.appendChild(savebox_image_select_block);
+        
+        let savebox_select_close_btn = document.createElement("button");
+        savebox_select_close_btn.setAttribute("type", "button");
+        savebox_select_close_btn.setAttribute("class", "savebox_select_close_btn");
+        
+        let close_img = document.createElement("img");
+        close_img.setAttribute("src", "{{url_for('static', filename='images/popup/vector_x.png')}}");
+        savebox_select_close_btn.appendChild(close_img);
+
+        savebox_image_select_block.appendChild(savebox_select_close_btn);
+        savebox_select_close_btn.addEventListener('click', function() {
+            savebox_image_background.classList.remove('on');
+        })
+
+        const response_data = await fetch("/selectsavebox", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+        .then(res => res.json())
+
+        let savebox_data = response_data.savebox_data;
+
+        if (savebox_data.length <= 0) {
+            let empty_text = document.createElement("div");
+            empty_text.setAttribute("class", "empty_text")
+            empty_text.innerHTML = "아직 사진이 없습니다.";
+            savebox_image_select_block.appendChild(empty_text);
+            return
+        }
+
+        let select_board_image = document.getElementById("select_board_image");
+
+        for (let i = 0; i < savebox_data.length; i++) {
+            let savebox_block = document.createElement("div");
+            savebox_block.setAttribute("class", "savebox_block");
+            savebox_block.setAttribute("id", savebox_data[i][0]);
+            
+            let savebox_image = document.createElement("img");
+            savebox_image.setAttribute("class", "savebox_image");
+            savebox_image.setAttribute("src", response_data.image_path + savebox_data[i][1]);
+            savebox_block.appendChild(savebox_image);
+        
+            savebox_image_select_block.appendChild(savebox_block);
+
+            savebox_block.addEventListener('click', function() {
+                select_board_image.src = savebox_image.src;
+                savebox_image_background.classList.remove('on');
+            })
+        }
+    }
+
+    async function submit_new_board() {
+        let select_image = document.getElementById("select_board_image").src;
+        let title_text = document.getElementById("title_text").value;
+        let contents_text = document.getElementById("contents_text").value;
+
+        if (select_image == '') {
+            alert("사진을 선택해주세요.");
+        }
+        else if (title_text == '') {
+            alert("제목을 입력해주세요.");
+        }
+        else {
+            await fetch("/newboard", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'select_image': select_image, 'title_text': title_text, 'contents_text': contents_text})
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+        }
+    }
+</script>
