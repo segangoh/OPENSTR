@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STR - Style Transfer for Recollection</title>
+        <link href="{{url_for('static', filename='css/banner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/community_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/new_post_button_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/board_popup_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/new_board_popup_style.css')}}" rel="stylesheet">
+        <script src="{{url_for('static', filename='js/community.js')}}"></script>
+        <script src="{{url_for('static', filename='js/load_board.js')}}"></script>
+    </head>
+
+    <body>
+        <header>
+            <!--BANNER-->
+            {% include 'banner.html' %}
+        </header>
+
+        <!--page contents-->
+        <section class="search_and_sort">
+            <form action="/community" method="get">
+                <div class="board_search_form">
+                    <input class="search_text" type="search" name="search_text" value={{search_text}}>
+                    <input class="search_submit" type="image" src="{{url_for('static', filename='images/community/vector_search.png')}}" alt="Submit">
+                </div>
+
+                <div class="board_sort_form">
+                    <select id="select_sort_by" onchange="this.form.submit()" name="select_order">
+                        <option value="recent" {% if sort_by=='recent' %}selected{% endif %}>최신순</option>
+                        <option value="like" {% if sort_by=='like' %}selected{% endif %}>인기순</option>
+                        <option value="comment" {% if sort_by=='comment' %}selected{% endif %}>댓글순</option>
+                    </select>
+                </div>
+            </form>
+        </section>
+        
+        <hr id="top_line_board">
+        
+        <section>
+            <div class="boards"></div>
+        </section>
+
+        <footer>
+            <div class="to_top" onclick="to_the_top()">Top</div>
+        </footer>
+
+        <script>
+            load_community_page();
+        </script>
+
+        <!--board popup-->
+        <div class="popup_block">
+            {% include '/member/board_popup.html' %}
+        </div>
+
+        <!--create new post-->
+        {% if current_user.is_authenticated %}
+            <!--floating button to write new post-->
+            {% include '/member/new_post_button.html' %}
+
+            <!--new board popup-->
+            <div class="new_board_popup_block">
+                {% include '/member/new_board_popup.html' %}
+            </div>
+        {% endif %}
+    </body>
+</html>

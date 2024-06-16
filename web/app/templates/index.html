@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STR - Style Transfer for Recollection</title>
+        <link href="{{url_for('static', filename='css/banner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/index_style.css')}}" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <!--BANNER-->
+            {% include 'banner.html' %}
+        </header>
+
+        <!--page contents-->
+        <section id="intro_intro">
+            <!--웹 페이지 소개-->
+            <div id="bg_colorbox_1"></div>
+            <div id="bg_colorbox_2"></div>
+            <div id="bg_colorbox_3"></div>
+            <div id="bg_colorbox_4"></div>
+            <div id="bg_colorbox_5"></div>
+
+            <div id="intro_title">
+                <h1>STR</h1>
+                <p>Style Transfer for Recollection</p>
+            </div>
+            <div id="intro_contents">
+                <p>당신의 추억을 새로 덧칠해 보세요.</p>
+                <p>STR은 Style Transfer for Recollection의 약자로, 사용자가 업로드한 사진의 화풍을 변환하여 새로운 그림을 만들어냅니다.</p>
+                <p>다양한 옵션을 통해 당신이 원하는 사진을 만들 수 있습니다.</p>
+                <p>반 고흐의 별이 빛나는 밤, 그랑드자
+                    트섬의 일요일 오후, 피카소의 추상화를 비롯해 완전히 새로운 세상에 섞여들어가 보세요.</p>
+                <p>캔버스 위로 당신의 추억이 새로 그려집니다.</p>
+            </div>
+            <img id="intro_img" src="{{url_for('static', filename='images/main/main_image.jpg')}}">
+
+            <img id="intro_down" src="{{url_for('static', filename='images/main/vector_arrow_down.png')}}">
+        </section>
+
+        <hr>
+
+        <section id="intro_style_example">
+            <div class="stex_block">
+                <p class="stex_text">반 고흐의 화풍 적용하기</p>
+                <img class="stex_before" src="{{url_for('static', filename='images/main/stex_1_1.jpg')}}">
+                <img class="stex_st" src="{{url_for('static', filename='images/main/Van_Gogh_Starry_Night.jpg')}}">
+                <img class="stex_process" src="{{url_for('static', filename='images/main/vector_arrow_right.png')}}">
+                <img class="stex_after" src="{{url_for('static', filename='images/main/stex_1_3.jpg')}}">
+            </div>
+            <div class="stex_block">
+                <p class="stex_text">조르주 쇠라의 화풍 적용하기</p>
+                <img class="stex_before" src="{{url_for('static', filename='images/main/stex_2_1.jpg')}}">
+                <img class="stex_st" src="{{url_for('static', filename='images/main/Georges_Seurat_A_Sunday_Afternoon_on_the_Island_of_La_Grande_Jatte.jpg')}}">
+                <img class="stex_process" src="{{url_for('static', filename='images/main/vector_arrow_right.png')}}">
+                <img class="stex_after" src="{{url_for('static', filename='images/main/stex_2_3.jpg')}}">
+            </div>
+            <div class="stex_block">
+                <p class="stex_text">생성모델을 이용한 화풍 적용하기</p>
+                <img class="stex_before" src="{{url_for('static', filename='images/main/stex_3_1.jpg')}}">
+                <img class="stex_st" src="{{url_for('static', filename='images/main/stex_3_2.png')}}">
+                <img class="stex_process" src="{{url_for('static', filename='images/main/vector_arrow_right.png')}}">
+                <img class="stex_after" src="{{url_for('static', filename='images/main/stex_3_3.png')}}">
+            </div>
+            <div class="stex_block">
+                <p class="stex_text">새로운 화풍 직접 적용하기</p>
+                <img class="stex_before" src="{{url_for('static', filename='images/main/stex_4_1.jpg')}}">
+                <img class="stex_st" src="{{url_for('static', filename='images/main/stex_4_2.jpg')}}">
+                <img class="stex_process" src="{{url_for('static', filename='images/main/vector_arrow_right.png')}}">
+                <img class="stex_after" src="{{url_for('static', filename='images/main/stex_4_3.jpg')}}">
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="intro_upload_example">
+            <!--사용 예시-->
+            <div id="upex_1">
+                <p>사진 전체 화풍 변경</p>
+                <img src="{{url_for('static', filename='images/main/upex_before.jpg')}}">
+                <img src="{{url_for('static', filename='images/main/upex_full.jpg')}}">
+            </div>
+            <div id="upex_2">
+                <img src="{{url_for('static', filename='images/main/upex_before.jpg')}}">
+                <img src="{{url_for('static', filename='images/main/upex_backgroundonly.jpg')}}">
+                <p>사진의 배경만 화풍 변경</p>
+            </div>
+            <div id="upex_3">
+                <p>사진을 합성하여 화풍 변경</p>
+                <img src="{{url_for('static', filename='images/main/upex_background.jpg')}}">
+                <img src="{{url_for('static', filename='images/main/upex_before.jpg')}}">
+                <img src="{{url_for('static', filename='images/main/upex_composite.jpg')}}">
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="intro_use">
+            <!--사용 방법-->
+            <div id="use_block">
+                <div class="use_detail">
+                    <img class="use_number" src="{{url_for('static', filename='images/main/vector_1.png')}}">
+                    <img class="use_img" src="{{url_for('static', filename='images/main/use_before.jpg')}}">
+                    <p>사진을 업로드하고</p>
+                </div>
+                <div class="v-line"></div>
+                <div class="use_detail">
+                    <img class="use_number" src="{{url_for('static', filename='images/main/vector_2.png')}}">
+                    <img class="use_img" src="{{url_for('static', filename='images/main/Georges_Seurat_A_Sunday_Afternoon_on_the_Island_of_La_Grande_Jatte.jpg')}}">
+                    <p>화풍을 선택하고</p>
+                </div>
+                <div class="v-line"></div>
+                <div class="use_detail">
+                    <img class="use_number" src="{{url_for('static', filename='images/main/vector_3.png')}}">
+                    <img class="use_img" src="{{url_for('static', filename='images/main/use_after.jpg')}}">
+                    <p>사진을 받아보세요</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <footer>
+            <p>단국대학교 SW융합대학 소프트웨어학과</p>
+            <p>오픈소스SW기여</p>
+            <p>오세강</p>
+        </footer>
+    </body>
+</html>

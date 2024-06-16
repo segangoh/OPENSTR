@@ -1,0 +1,397 @@
+.process-container{
+    width: 1280px;
+    margin:2rem auto;
+    background: #FCF8E8;
+    border-radius: 45px;
+    padding: 16px;
+}
+
+.step-status{
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : 24px;
+}
+
+.step-status span{
+    color: #707070;
+    pointer-events: none;
+}
+
+.step-status span.active{
+    font-weight: bold;
+    color: #DF7861;
+}
+
+.step-status span.prev{
+    color: #000000;
+    pointer-events: all;
+}
+
+.step-status span.last{
+    pointer-events: none;
+}
+
+.hidden{
+    display: none;
+}
+
+.uploadtype-container{
+    margin: 0px auto;
+    width: 1280px;
+    text-align: center;
+}
+
+.singleupload{
+    float: left;
+    width: 50%;
+}
+
+.v-line{
+    border: 1px solid black;
+    height: 520px;
+    width: 0.1px;
+    float: left;
+}
+
+.doubleupload{
+    float: right;
+    width: 49%;
+}
+
+.uploadimg_ex{
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.uploadimg_ex_one{
+    float: left;
+}
+
+.uploadimg_ex_hor{
+    float: left;
+}
+
+.upex{
+    width: 240px;
+    height: 160px;
+
+    object-fit: cover;
+}
+
+.righttri{
+    width: 20px;
+    height: 40px;
+}
+
+.plus{
+    width: 20px;
+    height: 20px;
+}
+
+.textex{
+    text-align: left;
+}
+
+.minrabtn{
+    width: 200px;
+    height: 68px;
+    border: 0;
+    border-radius: 35px;
+    padding: 1rem;
+    background: #DF7861;
+    color: #fff;
+}
+
+.uploadform{
+    width: 1280px;
+    margin:2rem auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+#imageone-upload{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 680px;
+    height: 380px;
+    background: #EEEEEE;
+}
+
+.uploadimg{
+    width: 680px;
+    height: 380px;
+    object-fit: contain;
+}
+
+.uploadex{
+    width: 64px;
+    height: 64px;
+}
+
+.next_btn{
+    margin-top: 10px;
+    width: 680px;
+    height: 45px;
+    border: 0;
+    padding: 1rem;
+    background: #DF7861;
+    color: #fff;
+}
+
+#imagetwo-upload{
+    margin: 0px auto;
+    width: 680px;
+}
+
+.background_human{
+    float: left;
+    width: 50%;
+}
+
+.upbackground_human{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    background: #EEEEEE;
+}
+
+.upimg{
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+ 
+}
+
+.styletype-container{
+    margin: 0px auto;
+    width: 1280px;
+    padding-left: 20px;
+}
+
+.stexbox{
+    text-align: center;
+    padding: 10px;
+    width: 350px;
+    float: left;
+}
+
+.stimgbox{
+    height: 290px;
+}
+
+.stimgbox.dalup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EEEEEE;
+}
+
+
+.steximgbox{
+    width: 160px;
+    height: 130px;
+    float: left;
+    background: #EEEEEE;
+}
+
+#steximgbox_1{
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+#steximgbox_3{
+    margin-right: 30px;
+}
+
+.stex{
+    width: inherit;
+    height: inherit;
+}
+
+.sttextbox{
+    height: 100px;
+    width: 350px;
+    text-align: left;
+}
+
+.minstbtn{
+    width: 200px;
+    height: 68px;
+    border: 0;
+    border-radius: 35px;
+    padding: 1rem;
+    background: #DF7861;
+    color: #fff;
+}
+
+.v-line_2{
+    margin-left: 41px;
+    margin-right: 41px;
+    border: 1px solid black;
+    height: 620px;
+    width: 0.1px;
+    float: left;
+}
+
+.styleform{
+    width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.stnobox{
+    width: 1200px;
+    height: 550px;
+    margin-bottom: 30px;
+}
+
+.stnoimgbox{
+    width: 380px;
+    height: 260px;
+    float: left;
+    background: #EEEEEE;
+}
+
+.stnoimgbox.select{
+    outline-style: solid;
+    outline-width: medium;
+}
+
+.stnoimgbox.left{
+    margin-right: 30px;
+}
+
+.stnoimgbox.bottom{
+    margin-top: 30px;
+}
+
+.stnoex{
+    width: 360px;
+    height: 260px;
+}
+
+#style-upload{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 680px;
+    height: 380px;
+    background: #EEEEEE;
+}
+
+.generative-chat{
+    width: 600px;
+    float: left;
+}
+
+.chatlog{
+    height: 400px;
+    margin-bottom: 20px;
+    background-color: #000000;
+    overflow-y: auto;
+}
+
+.chatline{
+    padding: 30px;
+}
+
+.icon{
+    width: 50px;
+    height: 50px;
+    padding-top: 5px;
+    border-radius: 50%;
+    font-size: 30px;
+    background-color: #fff;
+}
+
+.icon.left{
+    float: left;
+}
+
+.icon.right{
+    float: right;
+}
+
+.chat-text{
+    text-align: left;
+    margin-top: 7px;
+    max-width: 450px;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+}
+
+.chat-text.left{
+    float: left;
+    margin-left: 10px;
+}
+
+.chat-text.right{
+    float: right;
+    margin-right: 10px;
+}
+
+.text_form{
+    margin-right: 10px;
+    border: 0;
+    outline: none;
+    padding-left: 10px;
+    width: 480px;
+    height: 50px;
+    float: left;
+    background-color: #000000;
+    color: #fff;
+}
+
+.text_form::placeholder{
+    color: #fff;
+}
+
+.text_btn{
+    width: 96px;
+    height: 52px;
+    float: left;
+    background-color: #000000;
+    color: #fff;
+}
+
+.generative-img{
+    margin-left: 30px;
+    width: 600px;
+    float: left;
+}
+
+.gen-img{
+    height: 400px;
+    margin-bottom: 20px;
+    background:#EEEEEE;
+}
+
+#gen-image{
+    width: 600px;
+    height: 400px;
+    object-fit: contain;
+}
+
+.gnext_btn{
+    width: 600px;
+    height: 50px;
+    border: 0;
+    padding: 1rem;
+    background: #DF7861;
+    color: #fff;
+}

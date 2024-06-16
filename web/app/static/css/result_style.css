@@ -1,0 +1,26 @@
+.download{
+    width: 800px;
+    height: 50px;
+    font-size: 1.5em;
+    border: 0;
+    background: #DF7861;
+    color: #fff;
+}
+.result_block{
+    text-align: center;
+}
+
+.result_image{
+    width: 800px;
+    height: 450px;
+    object-fit: contain;
+}
+
+#new_post_button{
+    width: 800px;
+    height: 50px;
+    margin-top: 10px;
+    font-size: 1.5em;
+    background: #fff;
+    border: 0;
+}

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STR - Style Transfer for Recollection</title>
+        <link href="{{url_for('static', filename='css/banner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/transfer_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/wait.css')}}" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <!--BANNER-->
+            {% include 'banner.html' %}
+        </header>
+        {% include 'transfer/process_bar.html' %}
+        
+        <!--page contents-->
+        <div class="form uploadtype-container">
+            <div class = "singleupload">
+                <div class="uploadimg_ex">
+                    <div class="uploadimg_ex_one">
+                        <img class="upex" src="{{url_for('static',filename='images/transfer/upex_1_before.jpg')}}">
+                    </div>
+                    <div class="uploadimg_ex_one">
+                        <img class= "righttri" src="{{url_for('static',filename='images/transfer/vector_right_triangle.png')}}">
+                    </div>
+                    <div class="uploadimg_ex_hor">
+                        <img class="upex" src="{{url_for('static',filename='images/transfer/upex_1_full.jpg')}}">
+                        <div>OR</div>
+                        <img class="upex" src="{{url_for('static',filename='images/transfer/upex_1_backgroundonly.jpg')}}"> 
+                    </div>
+                </div>
+                <p class="textex">사진에 새로운 화풍을 적용해보세요. 사진 전체에 적용할 수도, 인물을 제외한 배경에만 적용할 수도 있습니다.</p>
+                <button type="button" class="next minrabtn" id="singleuploadbtn">선택하기</button>
+            </div>
+            <div class="v-line"></div>
+            <div class = "doubleupload">
+                <div class="uploadimg_ex">
+                    <div class="uploadimg_ex_hor">
+                        <img class="upex" src="{{url_for('static',filename='images/transfer/upex_2_background.jpg')}}">
+                        <div>
+                            <img class="plus" src="{{url_for('static',filename='images/transfer/vector_plus.png')}}">
+                        </div>
+                        <img class="upex" src="{{url_for('static',filename='images/transfer/upex_2_before.jpg')}}">
+                    </div>
+                    <div class="uploadimg_ex_one">
+                        <img class= "righttri" src="{{url_for('static',filename='images/transfer/vector_right_triangle.png')}}">
+                    </div>
+                    <div class="uploadimg_ex_one">
+                        <img class="upex" src="{{url_for('static',filename='images/transfer/upex_2_after.jpg')}}">
+                    </div>
+                </div>
+                <p class="textex">새로운 배경에 인물을 합성해보세요. 배경에 새로운 화풍을 적용한 뒤, 인물을 사진의 위치에 합성합니다.</p>
+                <button type="button" class="next minrabtn" id="doubleuploadbtn">선택하기</button>
+            </div>
+        </div>
+
+        <div class="form uploadform hidden">
+            <div class="upload uploadsingle-container hidden">
+                <div id="imageone-upload">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="uploadfilebutton">
+                            <div class="image-show" id="image-show_1">
+                                <!--이미지 띄울 공간-->
+                            </div>
+                            <img class="uploadimg hidden" id="img-up1">
+                            <div class="choose">
+                                <img class="uploadimg hidden" id="img-up1">
+                                <img class="uploadex" src="{{url_for('static',filename='images/transfer/vector_upload.png')}}">
+                                <div>이곳을 눌러 파일을 업로드하세요</div>
+                            </div>
+                        </div>
+                        <input type="file"  id="chooseFile_1" name="chooseFile" accept="image/*" required style="display: none;" onchange="loadcontent_target(this);">
+                    </form>
+                </div>    
+                <div class="fileContainer">
+                        <p class="targetname" id="fileName_1">example.jpg</p>
+                </div>
+
+                <div class="ckeckbox1"><input type="checkbox" name="segmentation" id="check_1" value="0">인물 제외하고 화풍 변경하기</div>
+
+                <button type="button" class="next_btn" id="singlefileupload" disabled>다음</button>
+            </div>
+            <div class="upload uploaddouble-conntainer hidden">
+                <div id="imagetwo-upload">
+                    <div class="background_human">
+                        <div>배경사진</div>
+                        <div class='upbackground_human' id="image-upload_3">
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="uploadfilebutton">
+                                    <div class="image_show" id="image-show_3">
+                                        <!--이미지 띄울 공간-->
+                                    </div>
+                                    <img class="upimg hidden" id="img-up2">
+                                    <div class="choose_back">
+                                        <img class="uploadex" src="{{url_for('static',filename='images/transfer/vector_upload.png')}}">
+                                        <div>이곳을 눌러 파일을 업로드하세요</div>
+                                    </div>
+                                </div>
+                                <input type="file"  id="chooseFile_3" name="chooseFile" accept="image/*" required style="display: none;" onchange="loadsource_target(this);">
+                            </form>
+                        </div>
+                        <div>
+                            <p id="fileName_3">example.jpg</p>
+                        </div>
+                    </div>
+
+                    <div class="background_human">
+                        <div>인물사진</div>
+                        <div class='upbackground_human' id="image-upload_2">
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="uploadfilebutton">
+                                    <div class="image_show" id="image-show_2">
+                                        <!--이미지 띄울 공간-->
+                                    </div>
+                                    <img class="upimg hidden" id="img-up3">
+                                    <div class="choose">
+                                        <img class="uploadex" src="{{url_for('static',filename='images/transfer/vector_upload.png')}}">
+                                        <div>이곳을 눌러 파일을 업로드하세요</div>
+                                    </div>
+                                </div>
+                                <input type="file"  id="chooseFile_2" name="chooseFile" accept="image/*" required style="display: none;" onchange="loadcontent_target(this);">
+                            </form>
+                        </div>
+                        <div>
+                            <p class="targetname">example.jpg</p>
+                        </div>
+                    </div>
+                </div>    
+
+                <div class="ckeckbox1"><input type="checkbox" name="segmentation" id="check_2" value="0">인물 제외하고 화풍 변경하기</div>
+
+                <button type="button" class="next_btn" id="doublefileupload" disabled>다음</button>
+            </div>
+        </div>
+
+        <div class="form styletype-container hidden">
+            <div class="stexbox">
+                <div class="stimgbox">
+                    <div class="steximgbox" id="steximgbox_1">
+                        <img class="stex" src="{{url_for('static',filename='images/transfer/0.png')}}">
+                    </div>
+                    <div class="steximgbox">
+                        <img class="stex" src="{{url_for('static',filename='images/transfer/1.png')}}">
+                    </div>
+                    <div class="steximgbox" id="steximgbox_3">
+                        <img class="stex" src="{{url_for('static',filename='images/transfer/3.png')}}">
+                    </div>
+                    <div class="steximgbox" id="steximgbox_4">
+                        <img class="stex" src="{{url_for('static',filename='images/transfer/4.png')}}">
+                    </div>
+                </div>
+                <div class="sttextbox">
+                    <p>STR에서 제공하는 화풍 중에 선택해보세요.</p>
+                </div>
+                <button type="button" class="next minstbtn" id="severgiftbtn">선택하기</button>
+            </div>
+            <div class="v-line_2"></div>
+            <div class="stexbox" id="styletype_dalle">
+                <div class="stimgbox dalup">
+                    <img class="stex" src="{{url_for('static', filename='images/transfer/generative_model_ex.png')}}">
+                </div>
+                <div class="sttextbox">
+                    <p>생성모델을 이용해 완전히 새로운 화풍을 만들어 보세요. 텍스트를 입력하면 그에 맞는 그림을 그려줍니다.</p>
+                </div>
+                <button type="button" class="next minstbtn" id="dallebtn">선택하기</button>
+            </div>
+            <div class="v-line_2"></div>
+            <div class="stexbox">
+                <div class="stimgbox dalup">
+                    <img class="uploadex" src="{{url_for('static',filename='images/transfer/vector_upload.png')}}">
+                </div>
+                <div class="sttextbox">
+                    <p>적용하고 싶은 화풍을 직접 업로드 해보세요. 어떤 결과가 나올지 궁금하지 않나요?</p>
+                </div>
+                <button type="button" class="next minstbtn" id="useruploadbtn">선택하기</button>
+            </div>
+        </div>
+
+        <div class="form styleform hidden">
+            <div class="style stylenorm-container hidden">
+                <div class="stnobox">
+                    <div class="stnoimgbox left" id="stnoimgbox_1" onclick="select_norm(0);">
+                        <img class="stnoex" src="{{url_for('static', filename='images/transfer/0.png')}}">
+                    </div>
+                    <div class="stnoimgbox left" id="stnoimgbox_2" onclick="select_norm(1);">
+                        <img class="stnoex" src="{{url_for('static', filename='images/transfer/1.png')}}">
+                    </div>
+                    <div class="stnoimgbox" id="stnoimgbox_3" onclick="select_norm(2);">
+                        <img class="stnoex" src="{{url_for('static', filename='images/transfer/2.png')}}">
+                    </div>
+                    <div class="stnoimgbox left bottom" id="stnoimgbox_4" onclick="select_norm(3);">
+                        <img class="stnoex" src="{{url_for('static', filename='images/transfer/3.png')}}">
+                    </div>
+                    <div class="stnoimgbox left bottom" id="stnoimgbox_5" onclick="select_norm(4);">
+                        <img class="stnoex" src="{{url_for('static', filename='images/transfer/4.png')}}">
+                    </div>
+                    <div class="stnoimgbox bottom" id="stnoimgbox_6" onclick="select_norm(5);">
+                        <img class="stnoex" src="{{url_for('static', filename='images/transfer/5.png')}}">
+                    </div>
+                </div>
+                <button type="button" class="next_btn" id="stylenorm" disabled>다음</button>
+            </div>
+            <div class="style generative-container hidden">
+                <div class="generative-chat">
+                    <div class="chatlog" id="chat_log">
+                        <div class="chatline">
+                            <div class="icon left">G</div>
+                            <div class="chat-text left">원하는 그림을 말씀해주세요</div>
+                        </div>
+                    </div>
+                    <div class="usechat">
+                        <input type="text" class="text_form" placeholder="원하는 그림을 이곳에 묘사해주세요" id="chat">
+                        <button type="button" class="text_btn" id="textsend">전송</button>
+                    </div>
+                </div>
+                <div class="generative-img">
+                    <div class="gen-img" id="gen-imgbox">
+                        <img class="hidden" id="gen-image">
+                    </div>
+                    <button type="button" class="gnext_btn" id="stylegen" disabled>다음</button>
+                </div>
+
+            </div>
+            <div class="style styleupload-container hidden">
+                <div id="style-upload">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="uploadfilebutton">
+                            <div class="image-show" id="image-show_4">
+                                <!--이미지 띄울 공간-->
+                            </div>
+                            <img class="uploadimg hidden" id="img-up4">
+                            <div class="choose_style">
+                                <img class="uploadex" src="{{url_for('static',filename='images/transfer/vector_upload.png')}}">
+                                <div>이곳을 눌러 파일을 업로드하세요</div>
+                            </div>
+                        </div>
+                        <input type="file"  id="chooseFile_4" name="chooseFile" accept="image/*" required style="display: none;" onchange="loadstyle(this);">
+                    </form>
+                </div>  
+                <div class="fileContainer">
+                        <p id="fileName_4">example.jpg</p>
+                </div>
+                <button type="button" class="next_btn" id="stylefileupload" disabled>다음</button>
+            </div>
+        </div>
+
+        <div class="form hidden">
+            <CENTER>
+            <img class="rotating-image-clockwise", src="{{url_for('static',filename='images/transfer/loading.png')}}">
+            </CENTER>
+            <p class="wait_text">잠시만 기다려주세요</p>
+        </div>
+
+        <script type="text/javascript" src="{{url_for('static',filename='js/transfer.js')}}"></script>
+    </body>
+</html>

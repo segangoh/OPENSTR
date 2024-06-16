@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STR - Style Transfer for Recollection</title>
+        <link href="{{url_for('static', filename='css/banner_style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='css/login_style.css')}}" rel="stylesheet">
+        <script type="text/javascript" src="{{url_for('static',filename='js/login.js')}}"></script>
+    </head>
+    <body>
+        <header>
+            <!--BANNER-->
+            {% include 'banner.html' %}
+        </header>
+        <!--page contents-->
+        <div id="login_block">
+            <form method="post" name='join' onsubmit="postdata(event)">
+                <div class="inner_div">
+                    <h1>Login</h1>
+                    <div class="error_div">
+                        <span id="state_message"></span>
+                    </div>
+                    <div class="list">
+                        <input class="check" type="text" id="user_id" placeholder="아이디" 
+                        onfocus="this.placeholder=''"  onblur="this.placeholder='아이디'" required>
+                    </div>
+                    <div class="list">
+                        <input class="check" type="password" id="user_pw" placeholder="비밀번호" 
+                        onfocus="this.placeholder=''" onblur="this.placeholder='비밀번호'" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="login">로그인</button>
+                        <hr>
+                        <button class="register" onclick="go2register(event)">회원가입</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,187 @@
+<div class="board_popup">
+    <img id="popup_board_image">
+
+    <div id="non_image_block">
+        <div id="popup_user_block">
+            <!--user-->
+            <img id="popup_user_image">
+            <div id="popup_user_name">사용자 이름</div>
+            <div id="popup_user_id">@ididid</div>
+        </div>
+        
+        <button type="button" class="close_btn"><img src="{{url_for('static', filename='images/popup/vector_x.png')}}"></button>
+
+        <div>
+            <div id="popup_board_title">
+                <!--title-->
+            </div>
+            
+            <div id="popup_board_contents">
+                <!--contents-->
+            </div>
+            
+            <div id="popup_board_date">
+                <!--date-->
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <!--like and comment number-->
+            <img id="popup_board_like_image" src="{{url_for('static', filename='images/popup/vector_like_outline.png')}}">
+            <span id="popup_board_like_num">000</span>
+            <img id="popup_board_comment_image" src="{{url_for('static', filename='images/popup/vector_comment.png')}}" width="40px">
+            <span id="popup_board_comment_num">댓글 00개</span>
+        </div>
+
+        <div id="popup_board_comments_block">
+            <!--comments-->
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <div id="popup_new_comment">
+            <!--new comment-->
+            <img id="new_comment_user_image" src="{{url_for('image_path', path_type=user_data[0], filename=user_data[2])}}">
+            <input id="new_comment_text" type="text" placeholder="댓글 작성" onkeypress="enter_submit_check(event)">
+            <input id="new_comment_submit" type="submit" value="작성" onclick="new_comment_submit()">
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    const modal_popup = document.querySelector(".popup_block");
+    let board_boxes = document.getElementsByClassName("board_block");
+    const modalClose = document.querySelector('.close_btn');
+    let board_popup = document.querySelector(".board_popup");
+
+    modalClose.addEventListener('click', function(){
+        modal_popup.classList.remove('on');
+    })
+
+    async function popup_data(board_id) {
+        const response_data = await fetch('/board/popup', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'board_id': board_id})
+        })
+        .then(res => res.json())
+
+        board_popup.setAttribute("id", board_id);
+
+        let popup_board_image = document.getElementById("popup_board_image");
+        popup_board_image.setAttribute("src", response_data.board_data[3]);
+
+        let popup_user_image = document.getElementById("popup_user_image");
+        popup_user_image.setAttribute("src", response_data.user_data[2]);
+        let popup_user_name = document.getElementById("popup_user_name");
+        popup_user_name.innerHTML = response_data.user_data[1];
+        let popup_user_id = document.getElementById("popup_user_id");
+        popup_user_id.innerHTML = "@" + response_data.user_data[0];
+
+        let popup_board_title = document.getElementById("popup_board_title");
+        popup_board_title.innerHTML = response_data.board_data[4];
+
+        let popup_board_contents = document.getElementById("popup_board_contents");
+        popup_board_contents.innerHTML = response_data.board_data[5].replaceAll("\n", "<br/>");
+
+        let popup_board_date = document.getElementById("popup_board_date");
+        popup_board_date.innerHTML = response_data.board_data[2];
+
+        let popup_board_like_image = document.getElementById("popup_board_like_image");
+        if (response_data.like_user_data) { // 좋아요를 눌렀던 경우
+            popup_board_like_image.setAttribute("src", "{{url_for('static', filename='images/popup/vector_like_fill.png')}}");
+            {% if current_user.is_authenticated %} // 로그인 시 버튼 활성화
+                popup_board_like_image.setAttribute("onclick", "press_like(1)");
+            {% endif %}
+        }
+        else { // 좋아요를 누르지 않았던 경우
+            popup_board_like_image.setAttribute("src", "{{url_for('static', filename='images/popup/vector_like_outline.png')}}");
+            {% if current_user.is_authenticated %} // 로그인 시 버튼 활성화
+                popup_board_like_image.setAttribute("onclick", "press_like(0)");
+            {% endif %}
+        }
+
+        // comments
+        let popup_board_like_num = document.getElementById("popup_board_like_num");
+        popup_board_like_num.innerHTML = response_data.like_count;
+        let popup_board_comment_num = document.getElementById("popup_board_comment_num");
+        popup_board_comment_num.innerHTML = "댓글 " + response_data.comment_data.length + "개";
+
+        let popup_board_comments_block = document.getElementById("popup_board_comments_block");
+        popup_board_comments_block.innerHTML = "";
+        for(let i = 0; i < response_data.comment_data.length; i++) {
+            let comment_block = document.createElement("div");
+            comment_block.setAttribute("class", "comment_block");
+
+            let comment_user_image = document.createElement("img");
+            comment_user_image.setAttribute("class", "comment_user_image");
+            comment_user_image.setAttribute("src", response_data.comment_data[i][3]);
+
+            let comment_user_name = document.createElement("div");
+            comment_user_name.setAttribute("class", "comment_user_name");
+            comment_user_name.innerHTML = response_data.comment_data[i][2];
+
+            let comment_user_id = document.createElement("div");
+            comment_user_id.setAttribute("class", "comment_user_id");
+            comment_user_id.innerHTML = "@" + response_data.comment_data[i][1];
+
+            let comment_contents = document.createElement("div");
+            comment_contents.setAttribute("class", "comment_contents");
+            comment_contents.innerHTML = response_data.comment_data[i][4];
+
+            comment_block.appendChild(comment_user_image);
+            comment_block.appendChild(comment_user_name);
+            comment_block.appendChild(comment_user_id);
+            comment_block.appendChild(comment_contents);
+            popup_board_comments_block.appendChild(comment_block);
+        }
+    }
+
+    async function press_like(pressed) {
+        let board_id = board_popup.id;
+        
+        await fetch("/board/popup/presslike", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'board_id': board_id, 'pressed': pressed})
+        })
+
+        popup_data(board_id)
+    }
+
+    function enter_submit_check(e) {
+        if (e.keyCode == 13) {
+            new_comment_submit();
+        }
+    }
+
+    async function new_comment_submit() {
+        let new_comment_text = document.getElementById("new_comment_text");
+        let input_contents = new_comment_text.value;
+        let board_id = board_popup.id;
+
+        new_comment_text.value = "";
+        new_comment_text.blur();
+
+        if (input_contents == '') {
+            alert("댓글 내용을 입력해주세요.");
+        }
+        else {
+            await fetch("/board/popup/newcomment", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'board_id': board_id, 'contents': input_contents})
+            })
+        }
+        
+        popup_data(board_id);
+    }
+</script>
